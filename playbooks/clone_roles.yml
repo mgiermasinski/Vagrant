@@ -1,0 +1,21 @@
+- name: Klonowanie rol
+  hosts: all
+  become: true
+  vars:
+    git_repository: https://github.com/mgiermasinski/Ansible_roles.git
+    git_branch: main
+
+  tasks:
+    - name: kreowaie folderu roles
+      file:
+        path: /etc/ansible/roles
+        mode: 0755
+        state: directory
+    - name: git roles
+      git:
+        repo: "{{ git_repository }}"
+        dest: /etc/ansible/roles
+        clone: true
+        version: "{{ git_branch }}"
+
+      
